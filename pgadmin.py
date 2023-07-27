@@ -42,3 +42,17 @@ def add_data(qanda:str, id:str):
     conn.commit()
     cursor.close()
     conn.close()
+
+
+def add_data2(qanda:str, id:str):
+    conn = psycopg2.connect(database="QA",
+                        host="localhost",
+                        user="postgres",
+                        password="Aegon070",
+                        port="5432")
+    cursor = conn.cursor()
+    insert_query = "UPDATE qaad SET responses = %s WHERE id = %s;"
+    cursor.execute(insert_query, (qanda, id))
+    conn.commit()
+    cursor.close()
+    conn.close()

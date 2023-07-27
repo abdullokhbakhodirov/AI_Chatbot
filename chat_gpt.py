@@ -1,17 +1,7 @@
 import openai
-import re
 import ast
 from pgadmin import getting_data, add_data
 
-
-def contains_code(context):
-    pattern = r'```[\s\S]*?```'
-
-    if re.search(pattern, context):
-        return True
-    else:
-        return False
-    
 
 def remove_quotes(text):
     cleaned_text = text.replace("'", "").replace('"', "")
@@ -53,8 +43,4 @@ def gpt_turbo(question, id):
     items[question] = answer
     dict_string = str(items)
     add_data(dict_string, id)
-    if not contains_code(answer):
-        return remove_quotes(answer)
-    else:
-        return True
-
+    return remove_quotes(answer)
